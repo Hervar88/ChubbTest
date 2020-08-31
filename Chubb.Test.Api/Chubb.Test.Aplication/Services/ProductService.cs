@@ -39,7 +39,8 @@ namespace Chubb.Test.Aplication.Services
 
         public async Task<bool> Delete(int id)
         {
-            var httpResponse = await _client.DeleteAsync($"{BaseUrl}?={id}");
+            var content = JsonConvert.SerializeObject(id);
+            var httpResponse = await _client.DeleteAsync($"{BaseUrl}?id={id}");
             var result = true;
             if (!httpResponse.IsSuccessStatusCode)
             {
