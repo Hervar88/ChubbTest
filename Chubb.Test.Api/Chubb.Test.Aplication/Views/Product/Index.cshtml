@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Chubb.Test.Aplication.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Productos</h1>
+
+
+<p>
+    <a asp-action="Create">Nuevo Producto</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var prod in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => prod.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.Amount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@prod.ProductId">Editar</a>
+                <a asp-action="Delete" asp-route-id="@prod.ProductId">Borrar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
