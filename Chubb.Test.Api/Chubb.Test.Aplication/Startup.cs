@@ -54,6 +54,8 @@ namespace Chubb.Test.Aplication
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           
         }
     }
 }

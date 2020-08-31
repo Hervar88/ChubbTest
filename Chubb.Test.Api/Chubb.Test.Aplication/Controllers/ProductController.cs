@@ -20,11 +20,17 @@ namespace Chubb.Test.Aplication.Controllers
         }
 
         // GET: ProductController
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchString)
         {
 
             var result = await _serviceProduct.GetAll();
-            return View(result);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                result = result.Where(w => w.Description.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+
+            return View(result.ToList());
         }
 
  

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Chubb.Test.Aplication.Models
 {
@@ -12,6 +13,9 @@ namespace Chubb.Test.Aplication.Models
         public string Category { get; set; }
         public decimal Price { get; set; }
         public int Amount { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
     }
     
 }

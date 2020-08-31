@@ -11,6 +11,13 @@
     <a asp-action="Create">Nuevo Producto</a>
 </p>
 
+<form asp-controller="Product" asp-action="Index">
+    <p>
+        Description: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table table-striped">
     <thead>
         <tr>
