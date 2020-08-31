@@ -12,7 +12,7 @@ namespace Chubb.Test.Aplication.Services
     public class ProductService : IServiceProduct
     {
 
-        private const string BaseUrl = "https://localhost:44370/Product";
+        private const string BaseUrl = "https://localhost:44370/Product/";
         private readonly HttpClient _client;
 
 
@@ -39,7 +39,7 @@ namespace Chubb.Test.Aplication.Services
 
         public async Task<bool> Delete(int id)
         {
-            var httpResponse = await _client.DeleteAsync($"{BaseUrl}{id}");
+            var httpResponse = await _client.DeleteAsync($"{BaseUrl}?={id}");
             var result = true;
             if (!httpResponse.IsSuccessStatusCode)
             {

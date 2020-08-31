@@ -12,13 +12,10 @@ namespace Chubb.Test.Aplication.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly HttpClient _httpClient;
         private readonly IServiceProduct _serviceProduct;
 
-        public ProductController(IHttpClientFactory httpClientFactory,
-            IServiceProduct serviceProduct)
+        public ProductController(IServiceProduct serviceProduct)
         {
-            _httpClient = httpClientFactory.CreateClient("ProductService");
             _serviceProduct = serviceProduct;
         }
 
@@ -30,17 +27,11 @@ namespace Chubb.Test.Aplication.Controllers
             return View(result);
         }
 
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+ 
 
         // GET: ProductController/Create
         public ActionResult Create()
         {
-
-
 
             return View();
         }
@@ -55,6 +46,7 @@ namespace Chubb.Test.Aplication.Controllers
                 if (ModelState.IsValid)
                 {
 
+                    _serviceProduct.Create(product);
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -65,22 +57,25 @@ namespace Chubb.Test.Aplication.Controllers
             }
         }
 
-        // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
+
+
+        // GET: ProductController/Edit
+        public async Task<ActionResult> Edit(int id)
         {
+            var product = await _serviceProduct.GetAll(id);
 
-
-
-            return View();
+            return View(product);
         }
 
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, Product product)
         {
             try
             {
+                await _serviceProduct.Update(product);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -90,18 +85,21 @@ namespace Chubb.Test.Aplication.Controllers
         }
 
         // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var product = await _serviceProduct.GetAll(id);
+            return View(product);
         }
 
         // POST: ProductController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async  Task<ActionResult> Delete(int id, Product product)
         {
             try
             {
+                await _serviceProduct.Delete(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
